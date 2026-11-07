@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toan Quoc Nguyen | Brain-Computer Interfaces &amp; HCI</title>
+  <meta name="description" content="Toan Quoc Nguyen, PhD researcher at TU Dortmund University. Human-centered computing, brain-computer interfaces, gaze, and HCI.">
+  <meta property="og:title" content="Toan Quoc Nguyen">
+  <meta property="og:image" content="https://toanquocnguyen.github.io/photo.jpg">
+  <meta property="og:description" content="PhD researcher, TU Dortmund University. Human-centered AI, brain-computer interfaces, gaze, HCI.">
+  <style>
+    :root {
+      /* Theme accents (only these two) */
+      --orange: #ee442f;
+      --blue: #63acbe;
+
+      /* Neutrals */
+      --bg: #fbfbfa;
+      --surface: #ffffff;
+      --text: #24272b;
+      --muted: #6b7077;
+      --line: #e3e4e2;
+      --blue-soft: color-mix(in srgb, var(--blue) 14%, white);
+      --font: Calibri, Carlito, "Segoe UI", system-ui, sans-serif;
+      --maxw: 760px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 400 17px/1.75 var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--orange); transition: color .2s, border-color .2s; }
+    a:hover { color: var(--orange); }
+    ::selection { background: var(--blue-soft); }
+
+    /* Navigation */
+    nav { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+    nav .inner { max-width: 1040px; margin: 0 auto; padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    nav a { border: none; }
+    nav .brand { white-space: nowrap; color: var(--text); font-size: 1rem; letter-spacing: 0.04em; }
+    nav .brand::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--orange); margin-right: 0.6rem; vertical-align: 1px; }
+    nav ul { list-style: none; display: flex; gap: 1.3rem; margin: 0; padding: 0; flex-wrap: nowrap; }
+    nav ul a { color: var(--muted); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.14em; }
+    nav ul a:hover { color: var(--orange); }
+
+    main { max-width: var(--maxw); margin: 0 auto; padding: 0 1.5rem 6rem; }
+    section { padding-top: 5.5rem; }
+    h2 {
+      font-weight: 400; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.22em;
+      color: var(--text); margin: 0 0 2rem; display: flex; align-items: center; gap: 0.8rem;
+    }
+    h2::before { content: ""; width: 22px; height: 2px; background: var(--orange); flex: none; }
+    h3.sub { font-weight: 400; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin: 2.5rem 0 0.5rem; }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 140px 1fr; gap: 2.75rem; align-items: center; padding-top: 6rem; }
+    .avatar {
+      width: 140px; height: 140px; border-radius: 50%; background: var(--blue-soft); color: var(--text);
+      display: grid; place-items: center; overflow: hidden; font-size: 2.6rem; font-weight: 300; letter-spacing: 0.06em;
+      box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--blue);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+    h1 { font-weight: 300; font-size: 2.9rem; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 0.6rem; }
+    .role { color: var(--muted); margin: 0 0 1.4rem; line-height: 1.6; }
+    .role a { color: var(--muted); border-bottom-color: var(--line); }
+    .role a:hover { color: var(--orange); border-bottom-color: var(--orange); }
+    .links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; }
+    .links a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; padding-bottom: 1px; border-bottom-color: var(--blue); }
+    .links a:hover { border-bottom-color: var(--orange); }
+
+    .bio p { margin: 0 0 1.1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.6rem; }
+    .tags span { font-size: 0.82rem; color: var(--text); background: var(--blue-soft); border-left: 2px solid var(--blue); padding: 0.2rem 0.75rem; }
+    .note { font-size: 0.92rem; color: var(--muted); margin-top: 1.6rem; }
+
+    /* News */
+    .news { list-style: none; margin: 0; padding: 0; }
+    .news li { display: grid; grid-template-columns: 110px 1fr; gap: 1.5rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+    .news .date { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 0.15rem; }
+    .news .src { font-size: 0.85rem; margin-left: 0.35rem; }
+    .empty { color: var(--muted); font-size: 0.95rem; padding: 1.5rem 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0; }
+
+    /* Publications */
+    .filters { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .filters button {
+      font: inherit; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; cursor: pointer;
+      background: none; border: none; border-bottom: 2px solid transparent; padding: 0 0 2px; color: var(--muted);
+    }
+    .filters button:hover { color: var(--text); }
+    .filters button[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--orange); }
+    .filters .count { color: var(--blue); margin-left: 0.25rem; }
+    .year { font-size: 1.6rem; font-weight: 300; color: var(--blue); margin: 2.2rem 0 0.2rem; }
+    .pub { padding: 1.1rem 0; border-top: 1px solid var(--line); }
+    .pub .title { font-weight: 600; margin: 0 0 0.25rem; line-height: 1.45; }
+    .pub .authors { color: var(--muted); font-size: 0.92rem; margin: 0; }
+    .pub .authors .me { color: var(--text); font-weight: 600; }
+    .pub .venue { font-size: 0.9rem; margin: 0.1rem 0 0; color: var(--muted); }
+    .pub .venue em { font-style: italic; }
+    .pub .extra { font-size: 0.82rem; color: var(--muted); margin: 0.1rem 0 0; }
+    .badge { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); background: var(--blue-soft); padding: 0.05rem 0.45rem; margin-left: 0.55rem; vertical-align: 2px; white-space: nowrap; }
+    .badge.award { background: var(--orange); color: #fff; }
+    .pub .actions { margin-top: 0.45rem; display: flex; gap: 1.2rem; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.12em; }
+    .pub .actions a { border-bottom-color: var(--blue); }
+    .pub .actions a:hover { border-bottom-color: var(--orange); }
+
+    /* Timelines */
+    .tl { list-style: none; margin: 0; padding: 0; }
+    .tl li { display: grid; grid-template-columns: 150px 1fr; gap: 1.5rem; padding: 1.1rem 0; border-top: 1px solid var(--line); }
+    .tl .when { font-size: 0.82rem; letter-spacing: 0.06em; color: var(--muted); padding-top: 0.15rem; }
+    .tl .what strong { display: block; font-weight: 600; }
+    .tl .what span { color: var(--muted); font-size: 0.92rem; display: block; }
+    .tl.compact li { padding: 0.75rem 0; }
+
+    /* Contact */
+    .contact-card { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; border-top: 1px solid var(--line); padding-top: 1.4rem; }
+    .contact-card h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--muted); margin: 0 0 0.6rem; font-weight: 400; }
+    .contact-card p { margin: 0; }
+
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.8rem; letter-spacing: 0.06em; }
+    footer .inner { max-width: var(--maxw); margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+    @media (max-width: 960px) { nav ul { display: none; } }
+    @media (max-width: 680px) {
+      .hero { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 3.5rem; }
+      .avatar { width: 104px; height: 104px; font-size: 2rem; }
+      h1 { font-size: 2.3rem; }
+      section { padding-top: 4rem; }
+      .tl li, .news li { grid-template-columns: 1fr; gap: 0.2rem; }
+      .contact-card { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a class="brand" href="#top">Toan Q. Nguyen</a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#news">News</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#awards">Awards</a></li>
+      <li><a href="#service">Service</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+
+  <header class="hero">
+    <div class="avatar"><img src="photo.jpg" alt="Toan Quoc Nguyen" width="140" height="140"></div>
+    <div>
+      <h1>Toan Quoc Nguyen</h1>
+      <p class="role">
+        PhD Researcher, <a href="https://rc-trust.ai/">Research Center Trustworthy Data Science and Security</a><br>
+        <a href="https://haii.cs.tu-dortmund.de/">Human-AI Interaction Group</a>, TU Dortmund University
+      </p>
+      <div class="links">
+        <a href="https://scholar.google.com/citations?user=eB4O4d8AAAAJ&amp;hl=en">Google Scholar</a>
+        <a href="https://orcid.org/0000-0001-9256-7087">ORCID</a>
+        <a href="https://github.com/toanquocnguyen">GitHub</a>
+        <a href="https://haii.cs.tu-dortmund.de/team/toan-nguyen/">HAII Profile</a>
+        <a href="mailto:toanquoc.nguyen@tu-dortmund.de">Email</a>
+        <!-- <a href="https://www.linkedin.com/in/YOUR-HANDLE">LinkedIn</a> -->
+        <!-- <a href="cv.pdf">CV</a> -->
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="bio">
+    <h2>About</h2>
+    <p>
+      I explore where the human body meets intelligent systems: how signals from the brain and eyes can teach
+      machines to understand people, and how that understanding can make technology more responsive and
+      inclusive. I am a PhD researcher in Computer Science at TU Dortmund University, based at the Research
+      Center Trustworthy Data Science and Security (RC Trust), working across human-centered computing,
+      brain-computer interfaces, and gaze-based interaction.
+    </p>
+    <p>
+      Before Dortmund, I spent two years as a researcher at the
+      <a href="https://www.uts.edu.au/research/human-centric-artificial-intelligence-centre">Human-centric Artificial Intelligence Centre</a>,
+      University of Technology Sydney, working on EEG-based dementia detection, emotion recognition, and silent
+      speech decoding. I hold an MSc in Electrical Engineering (AI-focused) from Hongik University, South Korea,
+      and a BSc in Computer Science from Can Tho University of Technology, Vietnam.
+    </p>
+    <div class="tags">
+      <span>Human-Centered Computing</span>
+      <span>Human-Centered AI</span>
+      <span>Brain-Computer Interfaces</span>
+      <span>EEG</span>
+      <span>Gaze &amp; Eye Tracking</span>
+      <span>HCI</span>
+    </div>
+  </section>
+
+  <section id="news">
+    <h2>News</h2>
+    <!--
+      To add a news item, put <li> entries inside the <ul> below (newest first) and delete the <p class="empty"> line.
+      Template:
+      <li>
+        <div class="date">Nov 2026</div>
+        <div class="item">Short description of the news. <a class="src" href="https://...">Read article</a></div>
+      </li>
+    -->
+    <ul class="news" id="news-list"></ul>
+    <p class="empty">No news yet. Check back soon.</p>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+    <ul class="tl">
+      <li>
+        <div class="when">12/2025 – now</div>
+        <div class="what"><strong>Researcher</strong>
+          <span>Research Center Trustworthy Data Science and Security, TU Dortmund University, Germany</span></div>
+      </li>
+      <li>
+        <div class="when">01/2024 – 12/2025</div>
+        <div class="what"><strong>Researcher</strong>
+          <span>Human-centric Artificial Intelligence Centre, University of Technology Sydney, Australia</span></div>
+      </li>
+      <li>
+        <div class="when">10/2023 – 12/2023</div>
+        <div class="what"><strong>Research Intern</strong>
+          <span>Gerontechnology Research Center, Yuan Ze University, Taiwan</span></div>
+      </li>
+      <li>
+        <div class="when">09/2021 – 09/2023</div>
+        <div class="what"><strong>Research Assistant</strong>
+          <span>Hongik AI Laboratory, Hongik University, South Korea</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <ul class="tl">
+      <li>
+        <div class="when">12/2025 – now</div>
+        <div class="what"><strong>PhD in Computer Science</strong>
+          <span>TU Dortmund University, Germany</span></div>
+      </li>
+      <li>
+        <div class="when">09/2021 – 08/2023</div>
+        <div class="what"><strong>MSc in Electrical Engineering (AI-focused)</strong>
+          <span>Hongik University, South Korea. GPA 4.5/4.5</span></div>
+      </li>
+      <li>
+        <div class="when">10/2016 – 09/2020</div>
+        <div class="what"><strong>BSc in Computer Science</strong>
+          <span>Can Tho University of Technology, Vietnam</span></div>
+      </li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+    <div class="filters" role="group" aria-label="Filter publications">
+      <button data-f="all" aria-pressed="true">All<span class="count" data-c="all"></span></button>
+      <button data-f="conf" aria-pressed="false">Conference Proceedings<span class="count" data-c="conf"></span></button>
+      <button data-f="journal" aria-pressed="false">Journal Articles<span class="count" data-c="journal"></span></button>
+    </div>
+    <div id="pub-list"></div>
+    <p class="note">
+      Citation counts are on <a href="https://scholar.google.com/citations?user=eB4O4d8AAAAJ&amp;hl=en">Google Scholar</a>.
+    </p>
+  </section>
+
+  <section id="awards">
+    <h2>Awards &amp; Scholarships</h2>
+    <ul class="tl compact">
+      <li><div class="when">2026</div><div class="what"><strong>AI Sentience Scholar, Cohort 2026</strong><span>Neuromatch</span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong>Gary Marsden Travel Award</strong><span>ACM Special Interest Group on Computer-Human Interaction (SIGCHI)</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>Bridging Divides Future Leaders Fellowship</strong><span>Toronto Metropolitan University, Canada First Research Excellence Fund (CAD$18,000)</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>Potential Researcher Award</strong><span>Australia–Vietnam Strategic Technologies Scholarship (Australian Government, Vietnam's Ministry of Science and Technology, UTS, PTIT, Nokia)</span></div></li>
+      <li><div class="when">2025</div><div class="what"><strong>Best Paper Award</strong><span>ACM ETRA 2025, GenEAI session</span></div></li>
+      <li><div class="when">2024</div><div class="what"><strong>Travel Grant</strong><span>AAAI/ACM Conference on AI, Ethics, and Society (AIES)</span></div></li>
+      <li><div class="when">2023</div><div class="what"><strong>International Internship Pilot Program (IIPP)</strong><span>Taiwan National Science and Technology Council. Fully funded three-month research stay in Taiwan</span></div></li>
+      <li><div class="when">2021</div><div class="what"><strong>Global Scholarship</strong><span>Hongik University. Fully funded two-year Master's program</span></div></li>
+      <li><div class="when">2020</div><div class="what"><strong>GBA Business Challenge 2020, Top 20</strong><span>German Business Association</span></div></li>
+    </ul>
+  </section>
+
+  <section id="service">
+    <h2>Talks &amp; Service</h2>
+    <ul class="tl compact">
+      <li><div class="when">2026</div><div class="what"><strong>Invited Talk, University of Toronto</strong><span>Introduction to Brain-Computer Interfaces Driven by Artificial Intelligence (host: Prof. Ebrahim Bagheri)</span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong>Program Committee</strong><span>BiAlign Workshop, ACM CHI Conference on Human Factors in Computing Systems</span></div></li>
+      <li><div class="when">2026</div><div class="what"><strong>Student Volunteer</strong><span>ACM Mensch und Computer</span></div></li>
+    </ul>
+
+    <h3 class="sub">Reviewing</h3>
+    <ul class="tl compact">
+      <li><div class="when">2026</div><div class="what"><span>ACM CHI Conference on Human Factors in Computing Systems (CHI 2027) · IEEE Sensors · Digital Health · Computer Methods in Biomechanics and Biomedical Engineering</span></div></li>
+      <li><div class="when">2025</div><div class="what"><span>Australian Conference on Human-Computer Interaction (OzCHI) · International Journal of Human-Computer Interaction</span></div></li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <div>
+        <h3>Office</h3>
+        <p>TU Dortmund University<br>Joseph-von-Fraunhofer-Str. 25, Room 225<br>44227 Dortmund, Germany</p>
+      </div>
+      <div>
+        <h3>Email</h3>
+        <p><a href="mailto:toanquoc.nguyen@tu-dortmund.de">toanquoc.nguyen@tu-dortmund.de</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="inner">© <span id="yr"></span> Toan Quoc Nguyen · Last updated November 2026</div>
+</footer>
+
+<script>
+  // Publications as listed in the CV. type: conf | journal
+  const ME = ["Toan Quoc Nguyen"];
+  const pubs = [
+    // ---------- Conference proceedings ----------
+    { year: 2026, type: "conf", badge: "MuC",
+      title: "Co-Designing AI-Powered Smart Glasses for Life-Logging Applications",
+      authors: "S. Bhattacharjee, A. Kalforian, F. M. Lau, Toan Quoc Nguyen, S. Mayer, J. Liebers",
+      venue: "Mensch und Computer 2026, Workshopband, Gesellschaft für Informatik e.V.",
+      doi: "10.18420/muc2026-mci-wip-334" },
+    { year: 2026, type: "conf", badge: "ICPR WS",
+      title: "Speech-Based Dementia Detection for Low-Resource Communities via Symbolic and Text Encoding",
+      authors: "Toan Quoc Nguyen, L. Le, N. Duong-Trung",
+      venue: "Pattern Recognition. ICPR 2026 International Workshops, LNCS, Springer",
+      pages: "pp. 350–365", doi: "10.1007/978-3-032-39379-1_25" },
+    { year: 2026, type: "conf", badge: "IUI",
+      title: "Explainable AI for Dementia Detection Using EEG Microstates",
+      authors: "Toan Quoc Nguyen, L. Le, D. Williams-King, N. Duong-Trung",
+      venue: "Companion Proceedings of the 31st International Conference on Intelligent User Interfaces (IUI '26), Paphos, Cyprus",
+      pages: "pp. 39–42", doi: "10.1145/3742414.3794731" },
+    { year: 2025, type: "conf", badge: "ETRA",
+      title: "Time-Series Grid Encoding of Eye-Tracking Data for Explainable AI in Dyslexia Detection",
+      authors: "L. Le, Toan Quoc Nguyen, D. Williams-King, N. Duong-Trung",
+      venue: "Proceedings of the 2025 Symposium on Eye Tracking Research and Applications (ETRA '25), Tokyo, Japan",
+      pages: "pp. 1–3", doi: "10.1145/3715669.3726811" },
+    { year: 2025, type: "conf", badge: "ICPR WS",
+      title: "Echo-GRU: Emotion Recognition Using Wearable EEG Supporting Early Alzheimer's Disease Detection",
+      authors: "Toan Quoc Nguyen",
+      venue: "Pattern Recognition. ICPR 2024 International Workshops and Challenges, LNCS, Springer",
+      pages: "pp. 3–17", doi: "10.1007/978-3-031-87657-8_1" },
+    { year: 2025, type: "conf", badge: "PAKDD WS",
+      title: "Predicting Progression from Mild Cognitive Impairment to Alzheimer's Using an AI-Based Multimodal Approach",
+      authors: "Toan Quoc Nguyen, N. Duong-Trung",
+      venue: "Trends and Applications in Knowledge Discovery and Data Mining (PAKDD 2025 Workshops), LNCS, Springer",
+      pages: "pp. 216–228", doi: "10.1007/978-981-96-8197-6_16" },
+    { year: 2025, type: "conf", badge: "NAACL WS",
+      title: "Leveraging Large Language Models in Detecting Anti-LGBTQIA+ User-generated Texts",
+      authors: "Toan Quoc Nguyen, J. Nguyen, V.-T. Pham, W. J. Teahan",
+      venue: "Proceedings of the Queer in AI Workshop at NAACL 2025, Association for Computational Linguistics",
+      pages: "pp. 26–34", doi: "10.18653/v1/2025.queerinai-main.4" },
+    { year: 2025, type: "conf", badge: "ACL SRW",
+      title: "Transforming Brainwaves into Language: EEG Microstates Meet Text Embedding Models for Dementia Detection",
+      authors: "Toan Quoc Nguyen, L. Le, D. Bai, N. Duong-Trung, T. Do, C.-T. Lin",
+      venue: "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 4: Student Research Workshop), Vienna, Austria",
+      pages: "pp. 186–202", doi: "10.18653/v1/2025.acl-srw.12" },
+    { year: 2025, type: "conf", badge: "ETRA",
+      title: "Learning Disorder Detection Using Eye Tracking: Are Large Language Models Better Than Machine Learning?",
+      authors: "Toan Quoc Nguyen, L. Le, T. Tien, D. Williams-King",
+      venue: "Proceedings of the 2025 Symposium on Eye Tracking Research and Applications (ETRA '25), Tokyo, Japan",
+      pages: "pp. 1–13", doi: "10.1145/3715669.3726785" },
+    { year: 2025, type: "conf", badge: "UMAP",
+      title: "Emotion Recognition Using Text Embedding Models: Wearable and Wireless EEG Without Fixed EEG Channel Configurations",
+      authors: "Toan Quoc Nguyen et al.",
+      venue: "Adjunct Proceedings of the 33rd ACM Conference on User Modeling, Adaptation and Personalization (UMAP '25)",
+      pages: "pp. 476–488", doi: "10.1145/3708319.3733645" },
+    { year: 2025, type: "conf", badge: "MIWAI",
+      title: "A Deep-Learning Framework for Land-Sliding Classification from Remote Sensing Image",
+      authors: "Q.-H. Tang, N.-T. Vo Dinh, D.-D. Pham, Toan Quoc Nguyen, L. Pham, T. Nguyen",
+      venue: "Multi-disciplinary Trends in Artificial Intelligence (MIWAI 2025), LNCS, Springer",
+      pages: "pp. 230–241", doi: "10.1007/978-981-95-4957-3_19" },
+    { year: 2025, type: "conf", badge: "ACM MM",
+      title: "Pretraining Large Brain Language Model for Active BCI: Silent Speech",
+      authors: "J. Zhou et al.",
+      venue: "Proceedings of the 33rd ACM International Conference on Multimedia (MM '25), Dublin, Ireland",
+      pages: "pp. 5883–5892", doi: "10.1145/3746027.3754810" },
+    { year: 2024, type: "conf", badge: "AIES",
+      title: "Advancing Early Alzheimer's Disease Detection in Underdeveloped Areas with Fair Explainable AI Methods",
+      authors: "Toan Quoc Nguyen",
+      venue: "Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society (AIES), vol. 7",
+      pages: "pp. 47–49", doi: "10.1609/aies.v7i2.31907" },
+    { year: 2024, type: "conf", badge: "UbiComp",
+      title: "FairAD-XAI: Evaluation Framework for Explainable AI Methods in Alzheimer's Disease Detection with Fairness-in-the-loop",
+      authors: "Toan Quoc Nguyen, L. Le, X.-T. Tran, T. Do, C.-T. Lin",
+      venue: "Companion of the 2024 ACM International Joint Conference on Pervasive and Ubiquitous Computing (UbiComp Companion '24), Melbourne, Australia",
+      pages: "pp. 870–876", doi: "10.1145/3675094.3678998" },
+    { year: 2024, type: "conf", badge: "IJCAI WS",
+      title: "EEG-SSM: Leveraging State-Space Model for Dementia Detection",
+      authors: "X.-T. Tran, L. Le, Toan Quoc Nguyen, T. Do, C.-T. Lin",
+      venue: "International Joint Conference on Artificial Intelligence (IJCAI) 2024, AI4TS Workshop",
+      doi: "10.48550/arXiv.2407.17801", arxiv: "2407.17801" },
+    { year: 2024, type: "conf", badge: "ACM MM WS",
+      title: "EEG-Based Contrastive Learning Models For Object Perception Using Multisensory Image-Audio Stimuli",
+      authors: "X.-T. Tran*, Toan Quoc Nguyen*, L. Le, T. Do, C.-T. Lin",
+      venue: "Proceedings of the 1st International Workshop on Brain-Computer Interfaces (BCI) for Multimedia Understanding, ACM Multimedia 2024, Melbourne, Australia",
+      pages: "pp. 39–47", doi: "10.1145/3688862.3689116", extra: "* Equal contribution" },
+    { year: 2022, type: "conf", badge: "SCORES",
+      title: "Super-Resolution Method for Reconstructing Street Images from Surveillance System Based on Real-ESRGAN",
+      authors: "Toan Quoc Nguyen",
+      venue: "Proceedings of the 8th Student Computing Research Symposium (SCORES)",
+      pages: "pp. 13–16",
+      url: "https://www.researchgate.net/publication/364692836_Super-Resolution_Method_for_Reconstructing_Street_Images_from_Surveillance_System_based_on_Real-ESRGAN",
+      urlLabel: "ResearchGate" },
+
+    // ---------- Journal articles ----------
+    { year: 2026, type: "journal", badge: "Intell. Robot.",
+      title: "Intelligent and Inclusive EEG-Driven Authentication for Gender Fairness and Cognitive Impairment",
+      authors: "Toan Quoc Nguyen et al.",
+      venue: "Intelligence & Robotics, vol. 6, no. 3",
+      pages: "pp. 396–426", doi: "10.20517/ir.2026.20" },
+    { year: 2025, type: "journal", badge: "IEEE TNSRE",
+      title: "Edge AI–Brain-Computer Interfaces System: A Survey",
+      authors: "M.-D. Nguyen, T. Do, X.-T. Tran, Toan Quoc Nguyen, C.-T. Lin",
+      venue: "IEEE Transactions on Neural Systems and Rehabilitation Engineering, vol. 33",
+      pages: "pp. 4051–4066", doi: "10.1109/TNSRE.2025.3618688" },
+    { year: 2025, type: "journal", badge: "IEEE Sens. Lett.",
+      title: "Standardizing Number of EEG Sensors for AI-Driven Dementia Detection",
+      authors: "Toan Quoc Nguyen",
+      venue: "IEEE Sensors Letters, vol. 9, no. 5",
+      pages: "pp. 1–4", doi: "10.1109/LSENS.2025.3560259" },
+    { year: 2023, type: "journal", badge: "EAI",
+      title: "Enhancing Single-Image Super-Resolution using Patch-Mosaic Data Augmentation on Lightweight Bimodal Network",
+      authors: "Toan Quoc Nguyen, T. Q. Hieu",
+      venue: "EAI Endorsed Transactions on Industrial Networks and Intelligent Systems, vol. 10, no. 2, e1",
+      doi: "10.4108/eetinis.v10i2.2774" },
+    { year: 2022, type: "journal", badge: "Intel. Artif.",
+      title: "Defective Sewing Stitch Semantic Segmentation Using DeepLabV3+ and EfficientNet",
+      authors: "Toan Quoc Nguyen",
+      venue: "Inteligencia Artificial, vol. 25, no. 70",
+      pages: "pp. 64–76", doi: "10.4114/intartif.vol25iss70pp64-76" },
+    { year: 2022, type: "journal", badge: "JCSI",
+      title: "Detrimental Starfish Detection on Embedded System: A Case Study of YOLOv5 Deep Learning Algorithm and TensorFlow Lite Framework",
+      authors: "Toan Quoc Nguyen",
+      venue: "Journal of Computer Sciences Institute, vol. 23",
+      pages: "pp. 105–111", doi: "10.35784/jcsi.2896" }
+  ];
+
+  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const markMe = a => {
+    let out = esc(a);
+    ME.forEach(n => { out = out.split(n).join(`<span class="me">${n}</span>`); });
+    return out;
+  };
+
+  document.querySelectorAll(".count").forEach(el => {
+    const c = el.dataset.c;
+    el.textContent = pubs.filter(p => c === "all" || p.type === c).length;
+  });
+
+  function render(filter) {
+    const list = document.getElementById("pub-list");
+    const shown = pubs.filter(p => filter === "all" || p.type === filter);
+    const years = [...new Set(shown.map(p => p.year))].sort((a, b) => b - a);
+    list.innerHTML = years.map(y => `
+      <div class="year">${y}</div>
+      ${shown.filter(p => p.year === y).map(p => {
+        const links = [];
+        if (p.doi) links.push(`<a href="https://doi.org/${p.doi}">DOI</a>`);
+        if (p.arxiv) links.push(`<a href="https://arxiv.org/abs/${p.arxiv}">arXiv</a>`);
+        if (p.url) links.push(`<a href="${p.url}">${p.urlLabel || "Link"}</a>`);
+        if (p.pdf) links.push(`<a href="${p.pdf}">PDF</a>`);
+        if (p.code) links.push(`<a href="${p.code}">Code</a>`);
+        return `
+        <article class="pub">
+          <p class="title">${esc(p.title)}${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}${p.award ? `<span class="badge award">${esc(p.award)}</span>` : ""}</p>
+          <p class="authors">${markMe(p.authors)}</p>
+          <p class="venue"><em>${esc(p.venue)}</em>${p.pages ? `, ${p.pages}` : ""}</p>
+          ${p.extra ? `<p class="extra">${esc(p.extra)}</p>` : ""}
+          ${links.length ? `<div class="actions">${links.join("")}</div>` : ""}
+        </article>`;
+      }).join("")}
+    `).join("");
+  }
+
+  document.querySelectorAll(".filters button").forEach(b => {
+    b.addEventListener("click", () => {
+      document.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", "false"));
+      b.setAttribute("aria-pressed", "true");
+      render(b.dataset.f);
+    });
+  });
+
+  render("all");
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
